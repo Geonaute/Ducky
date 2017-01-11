@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Ducky")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Visual Studio extension for editing and compiling your ducky script files.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("DarkByte7")]
 [assembly: AssemblyProduct("Ducky")]
-[assembly: AssemblyCopyright("")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("2016-2017")]
+[assembly: AssemblyTrademark("https://github.com/DarkByte7/Ducky")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
