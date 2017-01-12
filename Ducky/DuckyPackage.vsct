@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable"
+              xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!--  This is the file that defines the actual layout and type of the commands.
+        It is divided in different sections (e.g. command definition, command
+        placement, ...), with each defining a specific set of properties.
+        See the comment before each section for more details about how to
+        use it. -->
+
+  <!--  The VSCT compiler (the tool that translates this file into the binary
+        format that VisualStudio will consume) has the ability to run a preprocessor
+        on the vsct file; this preprocessor is (usually) the C++ preprocessor, so
+        it is possible to define includes and macros with the same syntax used
+        in C++ files. Using this ability of the compiler here, we include some files
+        defining some of the constants that we will use inside the file. -->
+
+  <!--This is the file that defines the IDs for all the commands exposed by VisualStudio. -->
+  <Extern href="stdidcmd.h" />
+
+  <!--This header contains the command ids for the menus provided by the shell. -->
+  <Extern href="vsshlids.h" />
+
+  <!--The Commands section is where commands, menus, and menu groups are defined.
+      This section uses a Guid to identify the package that provides the command defined inside it. -->
+  <Commands package="guidDuckyPackage">
+
+    <!-- Inside this section we have different sub-sections: one for the menus, another
+    for the menu groups, one for the buttons (the actual commands), one for the combos
+    and the last one for the bitmaps used. Each element is identified by a command id that
+    is a unique pair of guid and numeric identifier; the guid part of the identifier is usually
+    called "command set" and is used to group different command inside a logically related
+    group; your package should define its own command set in order to avoid collisions
+    with command ids defined by other packages. -->
+    <Menus>
+      <Menu guid="guidDuckyPackageCmdSet" id="MenuHeader" priority="0x700" type="Menu">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_MM_TOOLSADDINS" />
+        <Strings>
+          <ButtonText>Ducky</ButtonText>
+        </Strings>
+      </Menu>
+    </Menus>
+
+    <!-- In this section you can define new menu groups. A menu group is a container for
+         other menus or buttons (commands); from a visual point of view you can see the
+         group as the part of a menu contained between two lines. The parent of a group
+         must be a menu. -->
+    <Groups>
+      <Group guid="guidDuckyPackageCmdSet" id="EncodeGroup" priority="0x0000">
+        <Parent guid="guidDuckyPackageCmdSet" id="MenuHeader" />
+      </Group>
+      <Group guid="guidDuckyPackageCmdSet" id="ToolsGroup" priority="0x0001">
+        <Parent guid="guidDuckyPackageCmdSet" id="MenuHeader" />
+      </Group>
+      <Group guid="guidDuckyPackageCmdSet" id="HelpGroup" priority="0x0001">
+        <Parent guid="guidDuckyPackageCmdSet" id="MenuHeader" />
+      </Group>
+    </Groups>
+
+    <!--Buttons section. -->
+    <!--This section defines the elements the user can interact with, like a menu command or a button
+        or combo box in a toolbar. -->
+    <Buttons>
+      <!--To define a menu group you have to specify its ID, the parent menu and its display priority.
+          The command is visible and enabled by default. If you need to change the visibility, status, etc, you can use
+          the CommandFlag node.
+          You can add more than one CommandFlag node e.g.:
+              <CommandFlag>DefaultInvisible</CommandFlag>
+              <CommandFlag>DynamicVisibility</CommandFlag>
+          If you do not want an image next to your command, remove the Icon node /> -->
+      <Button guid="guidDuckyPackageCmdSet" id="EncodeCmd" priority="0x0000" type="Button">
+        <Parent guid="guidDuckyPackageCmdSet" id="EncodeGroup" />
+        <Icon guid="menuImages" id="BmpEncode" />
+        <!--<CommandFlag>DefaultInvisible</CommandFlag>-->
+        <!--<CommandFlag>DynamicVisibility</CommandFlag>-->
+        <Strings>
+          <ButtonText>Encode</ButtonText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidDuckyPackageCmdSet" id="PayloadManagerCmd" priority="0x0002" type="Button">
+        <Parent guid="guidDuckyPackageCmdSet" id="ToolsGroup" />
+        <Icon guid="menuImages" id="BmpPayloadManager" />
+        <Strings>
+          <ButtonText>Payload Manager</ButtonText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidDuckyPackageCmdSet" id="SettingsCmd" priority="0x0003" type="Button">
+        <Parent guid="guidDuckyPackageCmdSet" id="HelpGroup" />
+        <Icon guid="menuImages" id="BmpSettings" />
+        <Strings>
+          <ButtonText>Settings</ButtonText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidDuckyPackageCmdSet" id="AboutCmd" priority="0x0005" type="Button">
+        <Parent guid="guidDuckyPackageCmdSet" id="HelpGroup" />
+        <Icon guid="menuImages" id="BmpAbout" />
+        <Strings>
+          <ButtonText>About</ButtonText>
+        </Strings>
+      </Button>
+    </Buttons>
+
+    <!--The bitmaps section is used to define the bitmaps that are used for the commands.-->
+    <Bitmaps>
+      <!--  The bitmap id is defined in a way that is a little bit different from the others:
+            the declaration starts with a guid for the bitmap strip, then there is the resource id of the
+            bitmap strip containing the bitmaps and then there are the numeric ids of the elements used
+            inside a button definition. An important aspect of this declaration is that the element id
+            must be the actual index (1-based) of the bitmap inside the bitmap strip. -->
+      <Bitmap guid="menuImages" href="Resources\Images.png"
+                usedList="BmpEncode, BmpPayloadManager, BmpSettings, BmpAbout" />
+    </Bitmaps>
+  </Commands>
+
+  <Symbols>
+    <!-- This is the package guid. -->
+    <GuidSymbol name="guidDuckyPackage" value="{e4651be9-60a8-4107-86e9-3c7f93a9067d}" />
+
+    <!-- This is the guid used to group the menu commands together -->
+    <GuidSymbol name="guidDuckyPackageCmdSet" value="{7ca0b936-9dd1-45e4-b33d-b25e64460160}">
+      <IDSymbol name="MenuHeader" value="0x0001" />
+      <IDSymbol name="EncodeGroup" value="0x0002" />
+      <IDSymbol name="ToolsGroup" value="0x0003" />
+      <IDSymbol name="HelpGroup" value="0x0004" />
+
+      <IDSymbol name="EncodeCmd" value="0x0005" />
+      <IDSymbol name="Separator" value="0x0006" />
+      <IDSymbol name="PayloadManagerCmd" value="0x0007" />
+      <IDSymbol name="SettingsCmd" value="0x0008" />
+      <IDSymbol name="Separator" value="0x0009" />
+      <IDSymbol name="AboutCmd" value="0x0010" />
+    </GuidSymbol>
+
+    <GuidSymbol name="menuImages" value="{d19822df-5296-4de6-ac1c-ade8f69af115}">
+      <IDSymbol name="BmpEncode" value="1" />
+      <IDSymbol name="BmpPayloadManager" value="2" />
+      <IDSymbol name="BmpSettings" value="3" />
+      <IDSymbol name="BmpAbout" value="4" />
+    </GuidSymbol>
+  </Symbols>
+</CommandTable>
